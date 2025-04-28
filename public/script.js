@@ -21,50 +21,82 @@ fetch('weather.csv')
         prikaziTablicu(filtered, id2);
     });
 
-function prikaziTablicu(days, id) {
-    const tbody = document.querySelector(id);
-    tbody.innerHTML = '';
-    for (const dan of days) {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${dan.id}</td> 
-            <td>${dan.temperature}</td> 
-            <td>${dan.humidity}</td> 
-            <td>${dan.wind_speed}</td> 
-            <td>${dan.season}</td> 
-            <td>${dan.location}</td> 
-            <td>${dan.weather_type}</td>
-            <td><button class="add-to-cart" data-id="${dan.id}">Add to Cart</button></td>
-        `;
-        tbody.appendChild(row);
-    }
-
-    const buttons = tbody.querySelectorAll('.add-to-cart');
-    buttons.forEach(button => {
-        button.addEventListener('click', function() {
-            const itemId = this.getAttribute('data-id');
-            const item = sviFilmovi.find(day => day.id === itemId);
-            if (item) {        
-                const listItem = document.createElement('li');
-                listItem.setAttribute('data-id', item.id); // Dodajemo id za praćenje
-                listItem.textContent = `ID: ${item.id}, Temperature: ${item.temperature}, Humidity: ${item.humidity}, Wind Speed: ${item.wind_speed}`;
-                
-                
-                const removeButton = document.createElement('button');
-                removeButton.textContent = 'Remove';
-                removeButton.classList.add('remove-from-cart');
-                listItem.appendChild(removeButton);
-                
-                kosarica.appendChild(listItem);
-
-                // Dodavanje logike za uklanjanje stavke iz košarice
-                removeButton.addEventListener('click', function() {
-                    kosarica.removeChild(listItem);
-                });
-            }
+    function prikaziTablicu(days, id) {
+        const tbody = document.querySelector(id);
+        tbody.innerHTML = '';  // Očisti tablicu prije prikaza novih podataka
+    
+        days.forEach(day => {
+            const row = document.createElement('tr');
+    
+            // Korištenje textContent za unos podataka, tako da ne bude zabune s HTML kodom
+            const tdId = document.createElement('td');
+            tdId.textContent = day.id;
+    
+            const tdTemp = document.createElement('td');
+            tdTemp.textContent = day.temperature;
+    
+            const tdHumidity = document.createElement('td');
+            tdHumidity.textContent = day.humidity;
+    
+            const tdWindSpeed = document.createElement('td');
+            tdWindSpeed.textContent = day.wind_speed;
+    
+            const tdSeason = document.createElement('td');
+            tdSeason.textContent = day.season;
+    
+            const tdLocation = document.createElement('td');
+            tdLocation.textContent = day.location;
+    
+            const tdWeatherType = document.createElement('td');
+            tdWeatherType.textContent = day.weather_type;
+    
+            const tdButton = document.createElement('td');
+            const button = document.createElement('button');
+            button.textContent = 'Add to Cart';
+            button.classList.add('add-to-cart');
+            button.setAttribute('data-id', day.id);
+            tdButton.appendChild(button);
+    
+            // Dodavanje svakog td u red
+            row.appendChild(tdId);
+            row.appendChild(tdTemp);
+            row.appendChild(tdHumidity);
+            row.appendChild(tdWindSpeed);
+            row.appendChild(tdSeason);
+            row.appendChild(tdLocation);
+            row.appendChild(tdWeatherType);
+            row.appendChild(tdButton);
+    
+            tbody.appendChild(row);
         });
-    });
-}
+    
+        // Dodavanje event listenera na dugmadi
+        const buttons = tbody.querySelectorAll('.add-to-cart');
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const itemId = this.getAttribute('data-id');
+                const item = sviFilmovi.find(day => day.id === itemId);
+                if (item) {
+                    const listItem = document.createElement('li');
+                    listItem.setAttribute('data-id', item.id);  // Dodavanje id-a za praćenje
+                    listItem.textContent = `ID: ${item.id}, Temperature: ${item.temperature}, Humidity: ${item.humidity}, Wind Speed: ${item.wind_speed}`;
+                    
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = 'Remove';
+                    removeButton.classList.add('remove-from-cart');
+                    listItem.appendChild(removeButton);
+                    
+                    kosarica.appendChild(listItem);
+    
+                    // Logika za uklanjanje stavke iz košarice
+                    removeButton.addEventListener('click', function() {
+                        kosarica.removeChild(listItem);
+                    });
+                }
+            });
+        });
+    }
+    
 
 document.getElementById('filter-temperature').addEventListener('input', function() {
     // Ažuriraj prikaz temperature prema vrijednosti klizača

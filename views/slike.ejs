@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vremenska prognoza">
+    <meta name="keywords" content="Kiša, sunce">
+    <meta name="author" content="Luka Stanković">
+    <link rel="stylesheet" href="style_slike.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Gallery</title>
+</head>
+<body>
+    <header aria-labelledby="glavni-naslov">
+        <h1>Slike</h1>
+    </header>
+    <nav aria-labelledby="primarna-navigacija">
+        <ul>
+            <li class="dropdown">
+                <p class="dropbtn">Dropdown</p>
+                <section class="dropdown-content">
+                    <a href="/">Pocetna</a>
+                    <a href="/slike">Slike</a>
+                    <a href="./grafikon.html">Grafikon</a>
+                </section>
+            </li>
+        </ul>
+    </nav>
+    </header>
+    <main id="main-content" aria-label="Galerija slika"> 
+        <section class="galerija" aria-labelledby="Galerija slika"> 
+            <h1>Galerija slika</h1>
+            
+            <% images.forEach((image, index) => { %>
+                <figure class="galerija_slika">
+                    <a href="#lightbox-<%= index + 1 %>">
+                      <img src="<%= image.path %>" alt="<%= image.title || `Slika ${index + 1}` %>" loading="lazy">
+                    </a>
+                    <figcaption><%= image.title || `Slika ${index + 1}` %></figcaption>
+                </figure>
+            <% }); %>
+        </section>
+    
+        <!-- Lightboxes using figure elements -->
+        <% images.forEach((image, index) => { %>
+            <figure id="lightbox-<%= index + 1 %>" class="lightbox">
+                <img src="<%= image.path %>" alt="<%= image.title || `Slika ${index + 1}` %>">
+                <a href="#" class="lightbox-close">&times;</a>
+            </figure>
+        <% }); %>
+    </main>
+    <footer>
+        <p>&copy; 2025. Web Programiranje. Sva prava pridržana.</p>
+    </footer>
+</body>
+</html>

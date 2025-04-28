@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vremenska prognoza">
+    <meta name="keywords" content="Kiša, sunce">
+    <meta name="author" content="Domagoj Lešković">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="grafikon.css">
+    <title>Vremenski grafikoni</title>
+</head>
+<body>
+    <header aria-labelledby="glavni-naslov">
+		<h1>Grafikon</h1>
+		</header>
+		<!-- <header>
+       <nav aria-labelledby="primarna-navigacija">
+        <h2 id="primarna-navigacija">Primarna navigacija</h2>
+        
+        </nav>
+        </header>
+    -->
+		<nav aria-labelledby="primarna-navigacija"> <!-- dodati obilježja za ARIA-->
+			<ul>
+				<li class = "dropdown">
+					<p class = "dropbtn">Dropdown</p>
+					<section class = "dropdown-content">
+						<a href="./index.html">Pocetna</a>
+						<a href="slike">Slike</a>
+						<a href="./grafikon.html">Grafikon</a>
+					</section>
+				</li>
+			</ul>
+		</nav>
+    </header>
+
+    <main id="main-content" aria-labelby="Vremenski podaci"> 
+        <section class="chart-container" aria-labelledby="Analiza vremenskih podataka">
+            <h2>Analiza vremenskih podataka</h2>
+            
+            <article class="chart-wrapper" aria-labelledby="Legenda grafikona">
+                <aside class="chart-legend">
+                    <ul class="legend-list">
+                        <li class="legend-item">
+                            <span class="legend-color temperature-color"></span>
+                            <span>Temperatura (°C)</span>
+                        </li>
+                        <li class="legend-item">
+                            <span class="legend-color humidity-color"></span>
+                            <span>Vlažnost (%)</span>
+                        </li>
+                        <li class="legend-item">
+                            <span class="legend-color wind-color"></span>
+                            <span>Brzina vjetra (km/h)</span>
+                        </li>
+                        <li class="legend-item">
+                            <span class="legend-color precipitation-color"></span>
+                            <span>Padaline (%)</span>
+                        </li>
+                    </ul>
+                </aside>
+                
+                <!-- Bar Chart (displayed on desktop) -->
+                <figure class="bar-chart" aria-label="Pravokutni dijagram">
+                    <span class="bar temperature-bar" data-value="25.5">
+                        <span class="bar-tooltip">25.5°C</span>
+                    </span>
+                    <span class="bar humidity-bar" data-value="70.6">
+                        <span class="bar-tooltip">70.6%</span>
+                    </span>
+                    <span class="bar wind-bar" data-value="9.1">
+                        <span class="bar-tooltip">9.1 km/h</span>
+                    </span>
+                    <span class="bar precipitation-bar" data-value="49.3">
+                        <span class="bar-tooltip">49.3%</span>
+                    </span>
+                    <figcaption class="chart-note">Bar chart showing weather measurements</figcaption>
+                </figure>
+                
+                <!-- Pie Chart (displayed on mobile) -->
+                <figure class="pie-chart" aria-label="Dijagram torte>
+                    <span class="pie-slice temperature-slice">Temp</span>
+                    <span class="pie-slice humidity-slice">Vlaž</span>
+                    <span class="pie-slice wind-slice">Vjetar</span>
+                    <span class="pie-slice precipitation-slice">Pad</span>
+                    <figcaption class="chart-note">Pie chart showing weather data distribution</figcaption>
+                </figure>
+            </article>
+            
+            <p class="chart-note">Napomena: Prikazani podaci su prosječne vrijednosti iz tablice vremenskih podataka.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025. Web Programiranje. Sva prava pridržana.</p>
+    </footer>
+</body>
+</html>

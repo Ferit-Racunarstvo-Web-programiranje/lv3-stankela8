@@ -1,0 +1,10 @@
+[
+    { "path": "/images/sample-1.svg", "title": "Slika 1" },
+    { "path": "/images/sample-2.svg", "title": "Slika 2" },
+    { "path": "/images/sample-3.svg", "title": "Slika 3" },
+    { "path": "/images/sample-4.svg", "title": "Slika 4" },
+    { "path": "/images/sample-5.svg", "title": "Slika 5" },
+    { "path": "/images/sample-6.svg", "title": "Slika 6" },
+    { "path": "/images/sample-7.svg", "title": "Slika 7" },
+    { "path": "/images/sample-8.png", "title": "Slika 8" }
+]

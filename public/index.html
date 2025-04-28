@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+	<html lang="hr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Vremenska prognoza">
+		<meta name="keywords" content="Kiša, sunce">
+		<meta name="author" content="Luka Stanković">
+		<!--dodati meta tag bitan za stranicu-->
+		<!--dodati link za css dokumente -->
+		<link rel="stylesheet" href="style.css">
+        <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+		<title>Vremenska prognoza</title>
+	</head>
+	<body>
+		<header aria-labelledby="glavni-naslov">
+		<h1>Dobrodošli na vremenski portal</h1>
+		</header>
+		<h1>Vremenski Podaci</h1>
+		<nav aria-labelledby="primarna-navigacija"> <!-- dodati obilježja za ARIA-->
+			<ul>
+				<li class = "dropdown">
+					<p class = "dropbtn">Dropdown</p>
+					<section class = "dropdown-content">
+						<a href="./index.html">Pocetna</a>
+						<a href="slike">Slike</a>
+						<a href="./grafikon.html">Grafikon</a>
+					</section>
+				</li>
+			</ul>
+		</nav>
+		<main id="main-content">
+            <aside id="kosarica">
+                <section id="kosarica-content">
+                    <button id="toggle-kosarica">🛒 Moja košarica</button>
+                    <section id="kosarica-lista">
+                        <ul id="lista-kosarice">
+                            <!-- Dinamicki popunjeno -->
+                        </ul>
+                        <button id="potvrdi-kosaricu">Potvrdi odabir</button>
+                    </section>
+                </section>
+            </aside>
+            <table id="vrijeme-tablica">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Temperature</th>
+                        <th>Humidity</th>
+                        <th>Wind Speed</th>
+                        <th>Season</th>
+                        <th>Location</th>
+                        <th>Weather Type</th>
+                    </tr>
+                <tbody>
+                    
+                </tbody>
+            </table>
+                <div id="filteri">
+                    <select id="filter-genre">
+                        <option value="">Odaberi Sezonu</option>
+                        <option value="Spring">Spring</option>
+                        <option value="Summer">Summer</option>
+                        <option value="Autumn">Autumn</option>
+                        <option value="Winter">Winter</option>  
+                    </select>           
+                    <input type="number" id="filter-temperature" placeholder="Temperatura od">          
+                    <section id="filteri-sezona">
+                        <input type="radio" id="none" name="location" value="none">
+                        <label for="none">None</label>
+                        <input type="radio" id="inland" name="location" value="inland">
+                        <label for="inland">Inland</label>
+                        <input type="radio" id="mountain" name="location" value="mountain">
+                        <label for="mountain">Montain</label>
+                        <input type="radio" id="coastal" name="location" value="coastal">
+                        <label for="coastal">Coastal</label>
+                    </section>
+                    <button id="primijeni-filtere">Filtriraj</button>
+                </div>
+                <table id="vrijeme-tablica2">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Temperature</th>
+                            <th>Humidity</th>
+                            <th>Wind Speed</th>
+                            <th>Season</th>
+                            <th>Location</th>
+                            <th>Weather Type</th>
+                        </tr>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+		</main>
+		<footer aria-labelledby="footer">
+			<p>&copy; 2025. Web Programiranje. Sva prava pridrzana.</p>
+		</footer>
+        <script src="script.js"></script>
+	</body>
+	</html>

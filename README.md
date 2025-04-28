@@ -2,6 +2,6 @@
 # LV3-Java_Script
 
 LINK: 
-[https://lv3-stankela8-production.up.railway.app/]
+https://lv3-stankela8-production.up.railway.app/
 Luka Stanković, DRC LV3.
 Zadaci su dani u predlošku:

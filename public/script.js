@@ -21,65 +21,79 @@ fetch('weather.csv')
         prikaziTablicu(filtered, id2);
     });
 
-    function prikaziTablicu(days, id) {
-        const tbody = document.querySelector(id);
-        tbody.innerHTML = '';
-        for (const dan of days) {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${dan.id}</td> 
-                <td>${dan.temperature}</td> 
-                <td>${dan.humidity}</td> 
-                <td>${dan.wind_speed}</td> 
-                <td>${dan.season}</td> 
-                <td>${dan.location}</td> 
-                <td>${dan.weather_type}</td>
-                <td><button class="add-to-cart" data-id="${dan.id}">Add to Cart</button></td>
-            `;
-            tbody.appendChild(row);
-        }
-
-        const buttons = tbody.querySelectorAll('.add-to-cart');
-        buttons.forEach(button => {
-            button.addEventListener('click', function() {
-                const itemId = this.getAttribute('data-id');
-                const item = sviFilmovi.find(day => day.id === itemId);
-                if (item) {        
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `ID: ${item.id}, Temperature: ${item.temperature}, Humidity: ${item.humidity}, Wind Speed: ${item.wind_speed}`;
-                    kosarica.appendChild(listItem);
-                }
-            });
-        });
+function prikaziTablicu(days, id) {
+    const tbody = document.querySelector(id);
+    tbody.innerHTML = '';
+    for (const dan of days) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${dan.id}</td> 
+            <td>${dan.temperature}</td> 
+            <td>${dan.humidity}</td> 
+            <td>${dan.wind_speed}</td> 
+            <td>${dan.season}</td> 
+            <td>${dan.location}</td> 
+            <td>${dan.weather_type}</td>
+            <td><button class="add-to-cart" data-id="${dan.id}">Add to Cart</button></td>
+        `;
+        tbody.appendChild(row);
     }
-    document.getElementById('filter-temperature').addEventListener('input', function() {
-        // Ažuriraj prikaz temperature prema vrijednosti klizača
-        const temperatureValue = this.value;
-        document.getElementById('temperature-value').textContent = `${temperatureValue}°C`;
-    });
-    
-    document.getElementById('primijeni-filtere').addEventListener('click', () => {
-        const selectedSeason = document.getElementById('filter-genre').value;
-        const temperatureInput = document.getElementById('filter-temperature').value; // Dobijamo vrijednost iz klizača
-    
-        const selectedLocation = document.querySelector('input[name="location"]:checked');
-        let locationValue = selectedLocation ? selectedLocation.value : "";
-        if (locationValue === "none") {
-            locationValue = "";
-        }
-    
-        const filtrirani = sviFilmovi.filter(day => {
-            const matchesSeason = selectedSeason === "" || day.season === selectedSeason;
-            const matchesTemp = temperatureInput === "" || (day.temperature && Number(day.temperature) >= Number(temperatureInput));
-            const matchesLocation = locationValue === "" || day.location === locationValue;
-    
-            return matchesSeason && matchesTemp && matchesLocation;
+
+    const buttons = tbody.querySelectorAll('.add-to-cart');
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = this.getAttribute('data-id');
+            const item = sviFilmovi.find(day => day.id === itemId);
+            if (item) {        
+                const listItem = document.createElement('li');
+                listItem.setAttribute('data-id', item.id); // Dodajemo id za praćenje
+                listItem.textContent = `ID: ${item.id}, Temperature: ${item.temperature}, Humidity: ${item.humidity}, Wind Speed: ${item.wind_speed}`;
+                
+                
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Remove';
+                removeButton.classList.add('remove-from-cart');
+                listItem.appendChild(removeButton);
+                
+                kosarica.appendChild(listItem);
+
+                // Dodavanje logike za uklanjanje stavke iz košarice
+                removeButton.addEventListener('click', function() {
+                    kosarica.removeChild(listItem);
+                });
+            }
         });
-    
-        const sortirani = filtrirani.sort((a, b) => b.temperature - a.temperature);
-        prikaziTablicu(sortirani, '#vrijeme-tablica2 tbody');
     });
-    
+}
+
+document.getElementById('filter-temperature').addEventListener('input', function() {
+    // Ažuriraj prikaz temperature prema vrijednosti klizača
+    const temperatureValue = this.value;
+    document.getElementById('temperature-value').textContent = `${temperatureValue}°C`;
+});
+
+document.getElementById('primijeni-filtere').addEventListener('click', () => {
+    const selectedSeason = document.getElementById('filter-genre').value;
+    const temperatureInput = document.getElementById('filter-temperature').value; // Dobijamo vrijednost iz klizača
+
+    const selectedLocation = document.querySelector('input[name="location"]:checked');
+    let locationValue = selectedLocation ? selectedLocation.value : "";
+    if (locationValue === "none") {
+        locationValue = "";
+    }
+
+    const filtrirani = sviFilmovi.filter(day => {
+        const matchesSeason = selectedSeason === "" || day.season === selectedSeason;
+        const matchesTemp = temperatureInput === "" || (day.temperature && Number(day.temperature) >= Number(temperatureInput));
+        const matchesLocation = locationValue === "" || day.location === locationValue;
+
+        return matchesSeason && matchesTemp && matchesLocation;
+    });
+
+    const sortirani = filtrirani.sort((a, b) => b.temperature - a.temperature);
+    prikaziTablicu(sortirani, '#vrijeme-tablica2 tbody');
+});
+
 document.getElementById('toggle-kosarica').addEventListener('click', () => {
     const kosarica = document.getElementById('kosarica-lista');
     if (kosarica.style.display === 'none' || kosarica.style.display === '') {
@@ -95,6 +109,3 @@ document.getElementById('potvrdi-kosaricu').addEventListener('click', () => {
     document.getElementById('kosarica-lista').style.display = 'none';
     alert('Kosarica je potvrđena!');
 });
-
-
-

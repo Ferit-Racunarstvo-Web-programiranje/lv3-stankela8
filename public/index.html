@@ -56,27 +56,32 @@
                     
                 </tbody>
             </table>
-                <div id="filteri">
-                    <select id="filter-genre">
-                        <option value="">Odaberi Sezonu</option>
-                        <option value="Spring">Spring</option>
-                        <option value="Summer">Summer</option>
-                        <option value="Autumn">Autumn</option>
-                        <option value="Winter">Winter</option>  
-                    </select>           
-                    <input type="number" id="filter-temperature" placeholder="Temperatura od">          
-                    <section id="filteri-sezona">
-                        <input type="radio" id="none" name="location" value="none">
-                        <label for="none">None</label>
-                        <input type="radio" id="inland" name="location" value="inland">
-                        <label for="inland">Inland</label>
-                        <input type="radio" id="mountain" name="location" value="mountain">
-                        <label for="mountain">Montain</label>
-                        <input type="radio" id="coastal" name="location" value="coastal">
-                        <label for="coastal">Coastal</label>
-                    </section>
-                    <button id="primijeni-filtere">Filtriraj</button>
-                </div>
+			<div id="filteri">
+				<select id="filter-genre">
+					<option value="">Odaberi godišnje doba</option>
+					<option value="Spring">Spring</option>
+					<option value="Summer">Summer</option>
+					<option value="Autumn">Autumn</option>
+					<option value="Winter">Winter</option>  
+				</select>           
+				<!-- Slider za temperaturu -->
+				<label for="filter-temperature">Temperatura od:</label>
+				<input type="range" id="filter-temperature" min="-30" max="50" step="1" value="0">
+				<span id="temperature-value">0°C</span>
+				
+				<section id="filteri-sezona">
+					<input type="radio" id="none" name="location" value="none">
+					<label for="none">None</label>
+					<input type="radio" id="inland" name="location" value="inland">
+					<label for="inland">Inland</label>
+					<input type="radio" id="mountain" name="location" value="mountain">
+					<label for="mountain">Montain</label>
+					<input type="radio" id="coastal" name="location" value="coastal">
+					<label for="coastal">Coastal</label>
+				</section>
+				<button id="primijeni-filtere">Filtriraj</button>
+			</div>
+			
                 <table id="vrijeme-tablica2">
                     <thead>
                         <tr>

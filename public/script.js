@@ -52,29 +52,34 @@ fetch('weather.csv')
             });
         });
     }
-
-document.getElementById('primijeni-filtere').addEventListener('click', () => {
-    const selectedSeason = document.getElementById('filter-genre').value;
-    const temperatureInput = document.getElementById('filter-temperature').value;
-
-    const selectedLocation = document.querySelector('input[name="location"]:checked');
-    let locationValue = selectedLocation ? selectedLocation.value : "";
-    if (locationValue === "none") {
-        locationValue = "";
-    }
-
-    const filtrirani = sviFilmovi.filter(day => {
-        const matchesSeason = selectedSeason === "" || day.season === selectedSeason;
-        const matchesTemp = temperatureInput === "" || (day.temperature && Number(day.temperature) >= Number(temperatureInput));
-        const matchesLocation = locationValue === "" || day.location === locationValue;
-
-        return matchesSeason && matchesTemp && matchesLocation;
+    document.getElementById('filter-temperature').addEventListener('input', function() {
+        // Ažuriraj prikaz temperature prema vrijednosti klizača
+        const temperatureValue = this.value;
+        document.getElementById('temperature-value').textContent = `${temperatureValue}°C`;
     });
-
-    const sortirani = filtrirani.sort((a, b) => b.temperature - a.temperature);
-    prikaziTablicu(sortirani, '#vrijeme-tablica2 tbody');
-});
-
+    
+    document.getElementById('primijeni-filtere').addEventListener('click', () => {
+        const selectedSeason = document.getElementById('filter-genre').value;
+        const temperatureInput = document.getElementById('filter-temperature').value; // Dobijamo vrijednost iz klizača
+    
+        const selectedLocation = document.querySelector('input[name="location"]:checked');
+        let locationValue = selectedLocation ? selectedLocation.value : "";
+        if (locationValue === "none") {
+            locationValue = "";
+        }
+    
+        const filtrirani = sviFilmovi.filter(day => {
+            const matchesSeason = selectedSeason === "" || day.season === selectedSeason;
+            const matchesTemp = temperatureInput === "" || (day.temperature && Number(day.temperature) >= Number(temperatureInput));
+            const matchesLocation = locationValue === "" || day.location === locationValue;
+    
+            return matchesSeason && matchesTemp && matchesLocation;
+        });
+    
+        const sortirani = filtrirani.sort((a, b) => b.temperature - a.temperature);
+        prikaziTablicu(sortirani, '#vrijeme-tablica2 tbody');
+    });
+    
 document.getElementById('toggle-kosarica').addEventListener('click', () => {
     const kosarica = document.getElementById('kosarica-lista');
     if (kosarica.style.display === 'none' || kosarica.style.display === '') {
